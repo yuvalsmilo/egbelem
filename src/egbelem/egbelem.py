@@ -88,6 +88,7 @@ class EgbeLem(LandlabModel):
         """Initialize the model."""
         super().__init__(params, input_file)
 
+        self._global_dt = params["clock"]["step"]
         # Set up grid fields
         ic_params = params["initial_conditions"]
         if not ("topographic__elevation" in self.grid.at_node.keys()):
@@ -172,10 +173,13 @@ class EgbeLem(LandlabModel):
             plucking_by_tools_flag=egbe_params["plucking_by_tools_flag"],
         )
 
-    def update(self, dt):
+    def update(self, dt=None):
         """Advance the model by one time step of duration dt."""
         # print("BL Update here", self.current_time, dt, self.uplift_rate)
         # print(" topo before uplift", self.topo[self.grid.core_nodes])
+
+        if dt is None:
+            dt = self._global_dt
         dz = self.uplift_rate * dt
         self.topo[self.grid.core_nodes] += dz
         self.rock[self.grid.core_nodes] += dz
