@@ -1,0 +1,54 @@
+grid: 
+  source: create
+  create_grid: 
+    RasterModelGrid: 
+      shape: (31, 31)
+      xy_spacing: 1000.0
+clock: 
+  start: 0.0
+  stop: 1000.0
+  step: 10.0
+output:
+  plot_times: 250.0
+  save_times: 1000.0
+  report_times: 100.0
+  save_path: egbe_run
+  clobber: True
+  fields: null
+  plot_to_file: True
+initial_conditions:
+  initial_sed_thickness: 1.0
+  random_topo_amp: 10.0
+  initial_topo: 0.0
+baselevel:
+  uplift_rate: 0.0001
+flow_routing:
+  flow_metric: D8
+  update_flow_depressions: True
+  depression_handler: fill
+  epsilon: True
+  bankfull_runoff_rate: 1.0
+fluvial:
+    intermittency_factor: 0.01
+    transport_coefficient: 0.041
+    sediment_porosity: 0.3
+    depth_decay_scale: 1.0
+    plucking_coefficient: 1.0e-4
+    epsilon: 0.2
+    abrasion_coefficients: [1.0e-4]
+    bedrock_abrasion_coefficient: 1.0e-4
+    fractions_from_plucking: [0.5]
+    rho_sed: 2650.0
+    rho_water: 1000.0
+    use_fixed_width: True
+    fixed_width_coeff: 0.002
+    fixed_width_expt: 0.5
+    mannings_n: 0.05
+    tau_star_c_median: 0.0495
+    alpha: 0.68
+    tau_c_bedrock: 10.0
+    d_min: 0.1
+    grain_sizes: [0.1]
+    init_grains_weight: [1000.0]
+    plucking_by_tools_flag: True
+
