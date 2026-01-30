@@ -183,6 +183,7 @@ class EgbeLem(LandlabModel):
         dz = self.uplift_rate * dt
         self.topo[self.grid.core_nodes] += dz
         self.rock[self.grid.core_nodes] += dz
+
         # print(" topo after uplift but before GBE", self.topo[self.grid.core_nodes])
         self.router.run_one_step()
         self.eroder.run_one_step(dt)
